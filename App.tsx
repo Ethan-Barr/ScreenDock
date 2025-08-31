@@ -1,4 +1,5 @@
 import Clock from 'components/Clock';
+import Weather from 'components/Weather';
 
 import React from 'react';
 import * as ScreenOrientation from 'expo-screen-orientation';
@@ -31,6 +32,7 @@ export default function App() {
     <View className='bg-background flex-1 items-center justify-center'>
       <StatusBar hidden />
       <Clock />
+      <Weather />
     </View>
   );
 }
