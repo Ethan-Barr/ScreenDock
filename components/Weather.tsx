@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import * as Location from 'expo-location';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 
 export default function Weather() {
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
@@ -25,22 +25,29 @@ export default function Weather() {
         async function getCurrentWeather() {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied')
+                setErrorMsg('Permission to access location was denied');
+                return;
             }
 
             let loc = await Location.getCurrentPositionAsync({});
             setLocation(loc);
 
             const { longitude, latitude } = loc.coords;
-            console.log(`Longitude: ${longitude}, Latitude: ${latitude}`);
 
             const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
             const data = await res.json();
             setWeather(data.current_weather);
         }
 
+        // Initial fetch
         getCurrentWeather();
+
+        // Refresh every 10 minutes
+        const interval = setInterval(getCurrentWeather, 10 * 60 * 1000);
+
+        return () => clearInterval(interval);
     }, []);
+
 
 
     if (!weather) {
