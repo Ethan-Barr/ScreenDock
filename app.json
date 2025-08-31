@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-expo-app",
-    "slug": "my-expo-app",
+    "name": "ScreenDock",
+    "slug": "ScreenDock",
     "version": "1.0.0",
 
     "web": {
@@ -12,9 +12,7 @@
       "tsconfigPaths": true
     },
 
-    "plugins": [],
-
-    "orientation": "portrait",
+    "orientation": "landscape",
     "icon": "./assets/icon.png",
 
     "userInterfaceStyle": "light",
@@ -33,6 +31,21 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
-    }
+    },
+
+    "plugins": [
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "LANDSCAPE"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
+    ]
   }
 }
