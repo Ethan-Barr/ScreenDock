@@ -1,5 +1,5 @@
-import Clock from 'components/Clock';
-import Weather from 'components/Weather';
+import Clock from './components/Clock';
+import Weather from './components/Weather';
 
 import React from 'react';
 import * as ScreenOrientation from 'expo-screen-orientation';
